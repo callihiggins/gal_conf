@@ -1,5 +1,4 @@
-Genome[] genomes = new Genome[1];
-Triangle[] genomeTest;
+Genome genome;
 double fitOne, fitTwo;
 PImage mona;
 int alpha = 75;
@@ -10,22 +9,22 @@ int pixelOne, pixelTwo;
 int margins = 50;
 
 void setup() {
-  size(350, 200);
+  size(450, 275);
   mona = loadImage("mona.jpg");
-  for (int i = 0; i < genomes.length; i++) {
-    genomes[i] = new Genome();
-  }
+  fill(255);
+  noStroke();
+  rect(0, 0, width / 2, height);
+  genome = new Genome();
 }
 
 
 void draw() {
-  fitOne = fitness(genomes[0].triangles);
-  genomeTest = genomes[0].duplicate();
-  mutate(genomeTest);
-  fitTwo = fitness(genomeTest);
-  if (fitOne > fitTwo) {
+  fitOne = fitness(genome.triangles);
+  fitTwo = fitness(mutate(genome.duplicate()));
+
+  if (fitOne > fitTwo ) {
     //copy 
-    genomes[0].replace(genomeTest);
+    genome.replace(mutate(genome.duplicate()));
   }
   image(mona, 0, 0, width / 2, height);
 }
@@ -47,55 +46,46 @@ void display(Triangle[] tri) {
 }
 
 
-void mutate(Triangle[] tri) {
+Triangle[] mutate(Triangle[] tri) {
   for (int i = 0; i < tri.length; i++) {
     for (int j = 0; j < elements; j++) {
-      mutationCheck = random(0, 1);
-      if (j == 0) {
+      if (j == 0 && random(0, 1) <= mutationRate) {
         tri[i].x1 = int(random(width / 2 - margins, width + margins));
       } 
-      mutationCheck = random(0, 1);
-      if (j == 1) {
+      if (j == 1 && random(0, 1) <= mutationRate) {
         tri[i].x2 = int(random(width / 2 - margins, width + margins));
       } 
-      mutationCheck = random(0, 1);
-      if (j == 2) {
+      if (j == 2 && random(0, 1) <= mutationRate) {
         tri[i].x3 = int(random(width / 2 - margins, width + margins));
       } 
-      mutationCheck = random(0, 1);
-      if (j == 3) {
+      if (j == 3 && random(0, 1) <= mutationRate) {
         tri[i].x4 = int(random(width / 2 - margins, width + margins));
       } 
-      mutationCheck = random(0, 1);
-      if (j == 4) {
+      if (j == 4 && random(0, 1) <= mutationRate) {
         tri[i].y1 = int(random(0, height));
       } 
-      mutationCheck = random(0, 1);
-      if (j == 5) {
+      if (j == 5 && random(0, 1) <= mutationRate) {
         tri[i].y2 = int(random(0, height));
       } 
-      mutationCheck = random(0, 1);
-      if (j == 6) {
+      if (j == 6 && random(0, 1) <= mutationRate) {
         tri[i].y3 = int(random(0, height));
       } 
-      mutationCheck = random(0, 1);
-      if (j == 7) {
+      if (j == 7 && random(0, 1) <= mutationRate) {
         tri[i].y4 = int(random(0, height));
       } 
-      mutationCheck = random(0, 1);
-      if (j == 8) {
+      if (j == 8 && random(0, 1) <= mutationRate) {
         tri[i].r = int(random(0, 255));
       } 
-      mutationCheck = random(0, 1);
-      if (j == 9) {
+      if (j == 9 && random(0, 1) <= mutationRate) {
         tri[i].g = int(random(0, 255));
       } 
-      mutationCheck = random(0, 1);
-      if (j == 10) {
+      if (j == 10 && random(0, 1) <= mutationRate) {
         tri[i].b = int(random(0, 255));
       }
     }
   }
+
+  return tri;
 }
 
 
@@ -106,6 +96,7 @@ double fitness(Triangle[] tri) {
   fill(255);
   noStroke();
   rect(width / 2, 0, width, height);
+  
   display(tri);
   for (int x = 0; x < width / 2; x = x + 3) {
     for (int y = 0; y < height; y = y + 2) {

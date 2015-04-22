@@ -6,21 +6,17 @@ class Genome {
   Genome() {
     for (int i = 0; i < triangles.length; i++) {
       triangles[i] = new Triangle();
+      duplicated[i] = new Triangle();
     }
   }
 
   Triangle[] duplicate() {
-    //copy array
-    for (int i=0; i< triangles.length; i++) {
-      duplicated[i] = this.triangles[i];
-    }
+    arrayCopy(triangles, duplicated);
     return duplicated;
   }
 
   void replace(Triangle[] replaceThis) {
-    for (int i=0; i< triangles.length; i++) {
-      this.triangles[i] = replaceThis[i];
-    }
+    arrayCopy(replaceThis, triangles);
   }
 }
 
