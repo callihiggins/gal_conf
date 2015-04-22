@@ -6,19 +6,14 @@ class Genome {
   Genome() {
     for (int i = 0; i < triangles.length; i++) {
       triangles[i] = new Triangle();
-      // maybe objects in an array need to be init before copying 
-      duplicated[i] = new Triangle();
     }
   }
 
   Triangle[] duplicate() {
     //copy array
-    //    for (int i=0; i< triangles.length; i++) {
-    //      duplicated[i] = this.triangles[i];
-    //    }
-    //    return duplicated;
-
-    arrayCopy(triangles, duplicated);
+    for (int i=0; i< triangles.length; i++) {
+      duplicated[i] = this.triangles[i];
+    }
     return duplicated;
   }
 

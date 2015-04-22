@@ -1,9 +1,9 @@
 class Triangle {
 
   int x1, x2, x3, x4, y1, y2, y3, y4, r, g, b, pixelOne, pixelTwo;
-
-  Triangle() {
-
+  
+    Triangle() {
+      
     x1 = int(random(width / 2 - margins, width + margins));
     x2 = int(random(width / 2 - margins, width + margins));
     x3 = int(random(width / 2 - margins, width + margins));
